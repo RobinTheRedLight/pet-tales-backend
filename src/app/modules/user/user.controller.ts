@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// user.controller.ts
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
@@ -11,7 +12,6 @@ const createUser = catchAsync(async (req, res) => {
   const result = await UserServices.createUserIntoDB(userData);
 
   const { _doc } = result as any;
-
   const { password, ...userWithoutPassword } = _doc;
 
   sendResponse(res, {
@@ -22,16 +22,6 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
-const getAllUsers = catchAsync(async (req, res) => {
-  const users = await UserServices.getAllUsersFromDB();
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'All users retrieved successfully',
-    data: users,
-  });
-});
-
 const getUser = catchAsync(async (req, res) => {
   let token: any = req.headers.authorization;
   const splitToken = token.split(' ');
@@ -39,7 +29,6 @@ const getUser = catchAsync(async (req, res) => {
   const result = await UserServices.getUserFromDB(token);
 
   const { _doc } = result as any;
-
   const { password, ...userWithoutPassword } = _doc;
 
   sendResponse(res, {
@@ -47,17 +36,6 @@ const getUser = catchAsync(async (req, res) => {
     success: true,
     message: 'User profile retrieved successfully',
     data: userWithoutPassword,
-  });
-});
-
-const deleteUser = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await UserServices.deleteUserFromDB(id);
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'User deleted successfully',
-    data: result,
   });
 });
 
@@ -78,26 +56,8 @@ const updateUser = catchAsync(async (req, res) => {
   });
 });
 
-const updateUserAdmin = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const updateData = req.body;
-  const result = await UserServices.updateUserAdminFromDB({ updateData, id });
-  const { _doc } = result as any;
-  const { password, createdAt, updatedAt, __v, ...userWithoutPassword } = _doc;
-
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'User updated successfully',
-    data: userWithoutPassword,
-  });
-});
-
 export const UserControllers = {
   createUser,
   getUser,
   updateUser,
-  getAllUsers,
-  deleteUser,
-  updateUserAdmin,
 };
