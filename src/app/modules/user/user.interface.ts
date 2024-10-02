@@ -1,14 +1,18 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose';
-import { USER_ROLE } from './user.constant';
 
-export interface TUser {
+import { Document, Model } from 'mongoose';
+
+export interface TUser extends Document {
   name: string;
   email: string;
   password: string;
   phone: string;
   address: string;
   role: 'admin' | 'user';
+  image: string;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
+  createPasswordResetToken(): string;
 }
 
 export interface UserModel extends Model<TUser> {
@@ -18,5 +22,3 @@ export interface UserModel extends Model<TUser> {
     hashedPassword: string,
   ): Promise<boolean>;
 }
-
-export type TUserRole = keyof typeof USER_ROLE;
