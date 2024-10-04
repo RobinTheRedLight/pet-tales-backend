@@ -2,13 +2,15 @@
 
 import { Document, Model } from 'mongoose';
 
+export type TUserRole = 'admin' | 'user';
+
 export interface TUser extends Document {
   name: string;
   email: string;
   password: string;
   phone: string;
   address: string;
-  role: 'admin' | 'user';
+  role: TUserRole;
   image: string;
   passwordResetToken?: string;
   passwordResetExpires?: Date;
