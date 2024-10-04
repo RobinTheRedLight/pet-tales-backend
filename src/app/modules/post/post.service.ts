@@ -14,7 +14,7 @@ const getAllPosts = async (): Promise<IPost[]> => {
 };
 
 const getPostById = async (id: string): Promise<IPost | null> => {
-  const post = await Post.findById(id).populate('author', '-password');
+  const post = await Post.findById(id);
   if (!post) {
     throw new AppError(httpStatus.NOT_FOUND, 'Post not found');
   }

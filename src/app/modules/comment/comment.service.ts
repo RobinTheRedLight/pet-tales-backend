@@ -9,7 +9,7 @@ const createComment = async (commentData: IComment): Promise<IComment> => {
 };
 
 const getCommentsByPostId = async (postId: string): Promise<IComment[]> => {
-  const comments = await Comment.find({ postId }).populate('userEmail', 'name');
+  const comments = await Comment.find({ postId });
   return comments;
 };
 

@@ -5,12 +5,10 @@ const commentSchema = new Schema<IComment>(
   {
     postId: {
       type: Schema.Types.ObjectId,
-      ref: 'Post',
       required: true,
     },
     userEmail: {
       type: String,
-      ref: 'User',
       required: true,
     },
     content: {
