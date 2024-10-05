@@ -23,6 +23,4 @@ const voteSchema = new Schema<IVote>(
   },
 );
 
-voteSchema.index({ postId: 1, userEmail: 1 }, { unique: true });
-
 export const Vote = model<IVote>('Vote', voteSchema);

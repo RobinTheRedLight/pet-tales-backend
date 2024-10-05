@@ -24,7 +24,6 @@ const createOrUpdateVote = catchAsync(async (req: Request, res: Response) => {
 const getVotesByPostId = catchAsync(async (req: Request, res: Response) => {
   const { postId } = req.params;
   const userEmail = req.query.userEmail as string;
-  console.log(req.user);
   const votes = await VoteService.getVotesByPostId(postId, userEmail);
 
   sendResponse(res, {
