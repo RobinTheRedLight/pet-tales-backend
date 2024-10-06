@@ -17,4 +17,6 @@ export default {
   email_user: process.env.EMAIL_USER,
   email_pass: process.env.EMAIL_PASS,
   frontend_base_url: process.env.FRONTEND_BASE_URL || 'http://localhost:3000',
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+  frontendUrl: process.env.FRONTEND_BASE_URL,
 };

@@ -1,11 +1,28 @@
+import Stripe from 'stripe';
+import config from '../../config';
 import { Payment } from './payment.model';
-import { IPayment } from './payment.interface';
 
-const savePayment = async (paymentData: IPayment) => {
-  const payment = await Payment.create(paymentData);
-  return payment;
+const stripe = new Stripe(config.stripeSecretKey as string, {
+  apiVersion: '2024-09-30.acacia',
+});
+
+const createPaymentIntent = async (userEmail: string, amount: number) => {
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: amount * 100,
+    currency: 'usd',
+    metadata: { userEmail },
+  });
+
+  await Payment.create({
+    userEmail,
+    amount,
+    paymentIntentId: paymentIntent.id,
+    status: 'pending',
+  });
+
+  return paymentIntent;
 };
 
-export const PaymentService = {
-  savePayment,
+export const PaymentsService = {
+  createPaymentIntent,
 };

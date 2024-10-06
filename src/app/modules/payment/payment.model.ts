@@ -1,23 +1,14 @@
 import { Schema, model } from 'mongoose';
-import { IPayment } from './payment.interface';
 
-const paymentSchema = new Schema<IPayment>(
+const paymentSchema = new Schema(
   {
-    userId: {
+    userEmail: { type: String, required: true },
+    amount: { type: Number, required: true },
+    paymentIntentId: { type: String, required: true },
+    status: {
       type: String,
-      required: true,
-    },
-    amount: {
-      type: Number,
-      required: true,
-    },
-    paymentDate: {
-      type: Date,
-      default: Date.now,
-    },
-    transactionId: {
-      type: String,
-      required: true,
+      enum: ['pending', 'succeeded', 'failed'],
+      default: 'pending',
     },
   },
   {
@@ -25,4 +16,4 @@ const paymentSchema = new Schema<IPayment>(
   },
 );
 
-export const Payment = model<IPayment>('Payment', paymentSchema);
+export const Payment = model('Payment', paymentSchema);
