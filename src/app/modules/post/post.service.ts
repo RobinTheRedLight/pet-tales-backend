@@ -23,11 +23,11 @@ const getPostById = async (id: string): Promise<IPost | null> => {
 
 const updatePost = async (
   id: string,
-  userId: string,
+  userEmail: string,
   updateData: Partial<IPost>,
 ): Promise<IPost | null> => {
   const post = await Post.findOneAndUpdate(
-    { _id: id, author: userId },
+    { _id: id, author: userEmail },
     updateData,
     { new: true },
   );
@@ -44,9 +44,9 @@ const updatePost = async (
 
 const deletePost = async (
   id: string,
-  userId: string,
+  userEmail: string,
 ): Promise<IPost | null> => {
-  const post = await Post.findOneAndDelete({ _id: id, author: userId });
+  const post = await Post.findOneAndDelete({ _id: id, author: userEmail });
   if (!post) {
     throw new AppError(
       httpStatus.FORBIDDEN,

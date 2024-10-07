@@ -11,4 +11,10 @@ router.post(
   PaymentsController.createPaymentIntent,
 );
 
+router.get(
+  '/get-payment-by-email',
+  auth(USER_ROLE.user),
+  PaymentsController.getPaymentByEmail,
+);
+
 export const PaymentsRoutes = router;

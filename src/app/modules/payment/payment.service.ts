@@ -23,6 +23,12 @@ const createPaymentIntent = async (userEmail: string, amount: number) => {
   return paymentIntent;
 };
 
+const getPaymentByEmail = async (userEmail: string) => {
+  const payment = await Payment.findOne({ userEmail });
+  return payment;
+};
+
 export const PaymentsService = {
   createPaymentIntent,
+  getPaymentByEmail,
 };

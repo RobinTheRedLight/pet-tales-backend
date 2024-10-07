@@ -21,6 +21,17 @@ const createPaymentIntent = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getPaymentByEmail = catchAsync(async (req: Request, res: Response) => {
+  const userEmail = req.user.userEmail;
+  const payment = await PaymentsService.getPaymentByEmail(userEmail);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Payment fetched successfully',
+    data: payment,
+  });
+});
 export const PaymentsController = {
   createPaymentIntent,
+  getPaymentByEmail,
 };

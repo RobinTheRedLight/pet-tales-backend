@@ -41,10 +41,10 @@ const getPostById = catchAsync(async (req: Request, res: Response) => {
 
 const updatePost = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const userId = req.user._id;
+  const userEmail = req.user.userEmail;
   const updateData = req.body;
 
-  const post = await PostService.updatePost(id, userId, updateData);
+  const post = await PostService.updatePost(id, userEmail, updateData);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -56,9 +56,9 @@ const updatePost = catchAsync(async (req: Request, res: Response) => {
 
 const deletePost = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const userId = req.user._id;
+  const userEmail = req.user.userEmail;
 
-  const post = await PostService.deletePost(id, userId);
+  const post = await PostService.deletePost(id, userEmail);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -9,6 +9,8 @@ export interface IPost extends Document {
   images?: string[];
   author: string;
   isPremium?: boolean;
+  upvoteCount?: number;
+  downvoteCount?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

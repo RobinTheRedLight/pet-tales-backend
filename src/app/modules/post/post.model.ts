@@ -32,6 +32,14 @@ const postSchema = new Schema<IPost>(
       type: Boolean,
       default: false,
     },
+    upvoteCount: {
+      type: Number,
+      default: 0,
+    },
+    downvoteCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
