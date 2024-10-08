@@ -5,9 +5,25 @@ import { USER_ROLE } from '../user/user.constant';
 
 const router = express.Router();
 
-router.post('/', auth(USER_ROLE.user), FollowController.followUser);
-router.post('/unfollow', auth(USER_ROLE.user), FollowController.unfollowUser);
-router.get('/followers/:userId', FollowController.getUserFollowers);
-router.get('/following/:userId', FollowController.getUserFollowing);
+router.post(
+  '/',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  FollowController.followUser,
+);
+router.post(
+  '/unfollow',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  FollowController.unfollowUser,
+);
+router.get(
+  '/followers/:userEmail',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  FollowController.getUserFollowers,
+);
+router.get(
+  '/following/:userEmail',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  FollowController.getUserFollowing,
+);
 
 export const FollowRoutes = router;

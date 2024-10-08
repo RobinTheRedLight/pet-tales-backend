@@ -42,8 +42,33 @@ const updateUserAdmin = catchAsync(async (req, res) => {
   });
 });
 
+const getAllPayments = catchAsync(async (req, res) => {
+  const payments = await AdminServices.getAllPayments();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Payments retrieved successfully',
+    data: payments,
+  });
+});
+
+const togglePublishStatus = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const post = await AdminServices.togglePublishStatus(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Post publish status toggled successfully',
+    data: post,
+  });
+});
+
 export const AdminControllers = {
   getAllUsers,
   deleteUser,
   updateUserAdmin,
+  getAllPayments,
+  togglePublishStatus,
 };

@@ -21,6 +21,11 @@ const getPostById = async (id: string): Promise<IPost | null> => {
   return post;
 };
 
+const getPostsByUserEmail = async (userEmail: string): Promise<IPost[]> => {
+  const posts = await Post.find({ author: userEmail });
+  return posts;
+};
+
 const updatePost = async (
   id: string,
   userEmail: string,
@@ -60,6 +65,7 @@ export const PostService = {
   createPost,
   getAllPosts,
   getPostById,
+  getPostsByUserEmail,
   updatePost,
   deletePost,
 };

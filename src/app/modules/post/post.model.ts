@@ -32,6 +32,11 @@ const postSchema = new Schema<IPost>(
       type: Boolean,
       default: false,
     },
+    isPublishable: {
+      type: Boolean,
+      default: true,
+    },
+
     upvoteCount: {
       type: Number,
       default: 0,

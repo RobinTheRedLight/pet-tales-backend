@@ -13,7 +13,7 @@ router.post(
 
 router.get(
   '/get-payment-by-email',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   PaymentsController.getPaymentByEmail,
 );
 

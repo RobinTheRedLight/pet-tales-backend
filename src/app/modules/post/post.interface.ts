@@ -11,6 +11,7 @@ export interface IPost extends Document {
   isPremium?: boolean;
   upvoteCount?: number;
   downvoteCount?: number;
+  isPublishable?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

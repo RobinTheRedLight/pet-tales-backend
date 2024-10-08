@@ -5,9 +5,9 @@ import { FollowService } from './follow.service';
 import httpStatus from 'http-status';
 
 const followUser = catchAsync(async (req: Request, res: Response) => {
-  const { userIdToFollow } = req.body;
+  const { userEmailToFollow } = req.body;
   const userEmail = req.user?.userEmail;
-  const follow = await FollowService.followUser(userEmail, userIdToFollow);
+  const follow = await FollowService.followUser(userEmail, userEmailToFollow);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -18,9 +18,9 @@ const followUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const unfollowUser = catchAsync(async (req: Request, res: Response) => {
-  const { userIdToUnfollow } = req.body;
+  const { userEmailToUnfollow } = req.body;
   const userEmail = req.user?.userEmail;
-  await FollowService.unfollowUser(userEmail, userIdToUnfollow);
+  await FollowService.unfollowUser(userEmail, userEmailToUnfollow);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -31,8 +31,8 @@ const unfollowUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getUserFollowers = catchAsync(async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  const followers = await FollowService.getUserFollowers(userId);
+  const { userEmail } = req.params;
+  const followers = await FollowService.getUserFollowers(userEmail);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -42,8 +42,8 @@ const getUserFollowers = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getUserFollowing = catchAsync(async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  const following = await FollowService.getUserFollowing(userId);
+  const { userEmail } = req.params;
+  const following = await FollowService.getUserFollowing(userEmail);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

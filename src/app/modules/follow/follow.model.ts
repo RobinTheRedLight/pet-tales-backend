@@ -17,6 +17,4 @@ const followSchema = new Schema<IFollow>(
   },
 );
 
-followSchema.index({ userId: 1, followingUserEmail: 1 }, { unique: true });
-
 export const Follow = model<IFollow>('Follow', followSchema);

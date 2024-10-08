@@ -39,6 +39,18 @@ const getPostById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getPostsByUserEmail = catchAsync(async (req: Request, res: Response) => {
+  const { userEmail } = req.params;
+  console.log(userEmail);
+  const posts = await PostService.getPostsByUserEmail(userEmail);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: posts,
+  });
+});
+
 const updatePost = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const userEmail = req.user.userEmail;
@@ -72,6 +84,7 @@ export const PostController = {
   createPost,
   getAllPosts,
   getPostById,
+  getPostsByUserEmail,
   updatePost,
   deletePost,
 };

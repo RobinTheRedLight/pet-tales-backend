@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(PostValidation.createPostValidationSchema),
   PostController.createPost,
 );
@@ -18,13 +18,23 @@ router.get('/', PostController.getAllPosts);
 
 router.get('/:id', PostController.getPostById);
 
+router.get(
+  '/user/:userEmail',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  PostController.getPostsByUserEmail,
+);
+
 router.patch(
   '/:id',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(PostValidation.updatePostValidationSchema),
   PostController.updatePost,
 );
 
-router.delete('/:id', auth(USER_ROLE.user), PostController.deletePost);
+router.delete(
+  '/:id',
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  PostController.deletePost,
+);
 
 export const PostRoutes = router;

@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(CommentValidation.createCommentValidationSchema),
   CommentController.createComment,
 );
@@ -18,7 +18,7 @@ router.get('/:postId', CommentController.getCommentsByPostId);
 
 router.patch(
   '/:commentId',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(CommentValidation.updateCommentValidationSchema),
   CommentController.updateComment,
 );

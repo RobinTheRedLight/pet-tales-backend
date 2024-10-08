@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const followUserValidationSchema = z.object({
   body: z.object({
-    userIdToFollow: z.string({
+    userEmailToFollow: z.string({
       required_error: 'User ID to follow is required',
     }),
   }),
@@ -10,7 +10,7 @@ const followUserValidationSchema = z.object({
 
 const unfollowUserValidationSchema = z.object({
   body: z.object({
-    userIdToUnfollow: z.string({
+    userEmailToUnfollow: z.string({
       required_error: 'User ID to unfollow is required',
     }),
   }),

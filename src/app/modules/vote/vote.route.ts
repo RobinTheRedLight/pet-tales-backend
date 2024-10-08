@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
   '/',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   validateRequest(VoteValidation.createOrUpdateVoteValidationSchema),
   VoteController.createOrUpdateVote,
 );
