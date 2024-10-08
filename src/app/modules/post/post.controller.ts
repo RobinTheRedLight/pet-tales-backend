@@ -41,7 +41,6 @@ const getPostById = catchAsync(async (req: Request, res: Response) => {
 
 const getPostsByUserEmail = catchAsync(async (req: Request, res: Response) => {
   const { userEmail } = req.params;
-  console.log(userEmail);
   const posts = await PostService.getPostsByUserEmail(userEmail);
 
   sendResponse(res, {

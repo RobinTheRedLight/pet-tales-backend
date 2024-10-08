@@ -16,6 +16,17 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
+const getPosts = catchAsync(async (req, res) => {
+  const userEmail = req.user.userEmail;
+  const posts = await AdminServices.getAllAdminPosts(userEmail);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'All posts retrieved successfully',
+    data: posts,
+  });
+});
+
 const deleteUser = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await AdminServices.deleteUserFromDB(id);
@@ -71,4 +82,5 @@ export const AdminControllers = {
   updateUserAdmin,
   getAllPayments,
   togglePublishStatus,
+  getPosts,
 };

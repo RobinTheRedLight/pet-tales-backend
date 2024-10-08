@@ -6,6 +6,7 @@ import { ADMIN_ROLE } from './admin.constant';
 const router = express.Router();
 
 router.get('/allUsers', auth(ADMIN_ROLE.admin), AdminControllers.getAllUsers);
+router.get('/allPosts', auth(ADMIN_ROLE.admin), AdminControllers.getPosts);
 router.get(
   '/allPayments',
   auth(ADMIN_ROLE.admin),

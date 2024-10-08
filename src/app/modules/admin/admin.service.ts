@@ -14,6 +14,18 @@ const getAllUsersFromDB = async () => {
   return users;
 };
 
+const getAllAdminPosts = async (userEmail: string): Promise<IPost[]> => {
+  let posts: IPost[] = [];
+  const user = await User.findOne({ email: userEmail });
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'You are not authorized');
+  }
+  if (user.role === 'admin') {
+    posts = await Post.find();
+  }
+  return posts;
+};
+
 const deleteUserFromDB = async (id: string) => {
   const user = await User.findById(id);
   if (!user) {
@@ -75,4 +87,5 @@ export const AdminServices = {
   updateUserAdminFromDB,
   getAllPayments,
   togglePublishStatus,
+  getAllAdminPosts,
 };

@@ -9,7 +9,7 @@ const createPost = async (postData: IPost): Promise<IPost> => {
 };
 
 const getAllPosts = async (): Promise<IPost[]> => {
-  const posts = await Post.find();
+  const posts = await Post.find({ isPublishable: true });
   return posts;
 };
 
