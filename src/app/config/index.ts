@@ -16,7 +16,8 @@ export default {
   email_port: Number(process.env.EMAIL_PORT),
   email_user: process.env.EMAIL_USER,
   email_pass: process.env.EMAIL_PASS,
-  frontend_base_url: process.env.FRONTEND_BASE_URL || 'http://localhost:3000',
+  frontend_base_url:
+    process.env.FRONTEND_BASE_URL || 'https://grand-khapse-06c64b.netlify.app',
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
   frontendUrl: process.env.FRONTEND_BASE_URL,
 };

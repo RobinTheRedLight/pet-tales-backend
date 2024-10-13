@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://grand-khapse-06c64b.netlify.app',
     credentials: true,
   }),
 );
