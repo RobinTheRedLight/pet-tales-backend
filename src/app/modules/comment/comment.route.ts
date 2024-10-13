@@ -25,7 +25,7 @@ router.patch(
 
 router.delete(
   '/:commentId',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.admin),
   CommentController.deleteComment,
 );
 
